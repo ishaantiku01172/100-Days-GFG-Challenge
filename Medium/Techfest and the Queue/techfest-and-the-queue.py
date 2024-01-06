@@ -1,62 +1,27 @@
-
 from typing import List
-
 class Solution:
-
     def sumOfPowers(self, a: int, b: int) -> int:
-
         def sieve_of_eratosthenes(limit):
-
             primes = [True] * (limit + 1)
-
             primes[0] = primes[1] = False
-
- 
-
             for i in range(2, int(limit**0.5) + 1):
-
                 if primes[i]:
-
-                    for j in range(i*i, limit + 1, i):
-
-                        primes[j] = False
-
- 
-
+                   for j in range(i*i, limit + 1, i):
+                       primes[j] = False
             return [num for num in range(2, limit + 1) if primes[num]]
-
- 
-
         def prime_factors_count_sieve(num, primes):
-
             factors_count = {}
-
             for prime in primes:
-
                 if prime * prime > num:
-
                     break
-
                 while num % prime == 0:
-
                     num //= prime
-
                     factors_count[prime] = factors_count.get(prime, 0) + 1
-
             if num > 1:
-
                 factors_count[num] = factors_count.get(num, 0) + 1
-
             return factors_count
-
- 
-
         primes_up_to_b = sieve_of_eratosthenes(b)
-
         total_sum = 0
-
- 
-
         for num in range(a, b + 1):
 
             factors_count = prime_factors_count_sieve(num, primes_up_to_b)
