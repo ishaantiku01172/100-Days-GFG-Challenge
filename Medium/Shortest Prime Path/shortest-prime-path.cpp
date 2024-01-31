@@ -7,39 +7,62 @@ using namespace std;
 //User function Template for C++
 class Solution{   
 public:
+    // int len=10002;
+    vector<int> prime;
+    vector<int> dis;
     int solve(int num1,int num2)
     {   
-      vector<int> prime(10000,1);
-      for(int i = 2;i*i<10000;i++){
-          if(prime[i]){
-              for(int j = 2*i;j<10000;j+=i)prime[j] = 0;
-          }
-      }
-      
-      unordered_set<int> st;
-      for(int i = 1000;i<10000;i++) if(prime[i])st.insert(i);
-      queue<pair<int,int>>q;
-      q.push({0,num1});
-      while(!q.empty()){
-          int dist = q.front().first;
-          int n = q.front().second;
-          q.pop();
-          if(n== num2) return dist;
-          string num = to_string(n);
-          for(int i = 0;i<4;i++){
-              for(int j = 0;j<=9;j++){
-                  char c = num[i];
-                  num[i] = ('0' + j);
-                  int nNum = stoi(num);
-                  if(st.find(nNum) != st.end()){
-                      st.erase(nNum);
-                      if(num2 == nNum) return dist+1;
-                      q.push({dist+1,nNum});
-                  }
-                  num[i] = c;
-              }
-          }
-      }
+      //code here
+      prime.resize(10002,1);
+      dis.resize(10002,-1);
+      for (int p = 2; p * p <= 10001; p++) {
+            if (prime[p] == 1) {
+                for (int i = p * p; i <= 10001; i += p)
+                    prime[i] = 0;
+            }
+        }
+        
+        queue<int> q1,q2;
+        dis[num1]=0;
+        q1.push(num1);
+        int d=0;
+        while(!q1.empty())
+        {
+            d++;
+            while(!q1.empty())
+            {
+                int num=q1.front();
+                
+                for(int i=0;i<=3;i++)
+                {
+                    int rem=num%((int)pow(10,i));
+                    int temp=num/(int)pow(10,i+1);
+                    temp=temp*((int)pow(10,i+1));
+                    temp+=rem;
+                    // cout<<temp<<"\n";
+                    for(int j=0;j<=9;j++)
+                    {
+                        if(i==3 && j==0)
+                            continue;
+                        int nextnum=temp+(j*(int)pow(10,i));
+                        if(prime[nextnum]==1 && dis[nextnum]==-1)
+                        {
+                            dis[nextnum]=d;
+                            if(nextnum==num2)
+                            return d;
+                            
+                            q2.push(nextnum);
+                        }
+                    // cout<<nextnum<<"\n";
+                    }
+                    
+                }
+                q1.pop();
+            }
+            q1=q2;
+            q2=queue<int>();
+        }
+        return -1;
     }
 };
 
