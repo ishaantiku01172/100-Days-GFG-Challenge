@@ -87,18 +87,8 @@ Node* buildTree(string str)
 
 
 // } Driver Code Ends
-/* The structure of the binary tree is as follows
-struct Node
-{
-    int data;
-    Node* left;
-    Node* right;
-};
-*/
-
 class Solution{
   public:
-    /*You are required to complete this method*/
     bool preorder(Node*root,int level,unordered_map<int,int>&mp)
     {
         if(root->left==NULL && root->right==NULL) 
