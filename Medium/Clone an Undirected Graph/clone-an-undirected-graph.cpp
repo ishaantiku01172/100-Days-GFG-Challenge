@@ -108,26 +108,21 @@ bool compare(Node* prev, Node* new_node, unordered_set<Node*>& prev_vis, unorder
 
 class Solution {
 public:
-
-unordered_map<Node* , Node*> copies;
+    unordered_map<Node*,Node*> mp;
     Node* cloneGraph(Node* node) {
-
- 
-        if (!node) {
-            return NULL;
+        if(node == NULL) return NULL;
+        Node* t = new Node(node->val);
+        mp[node] = t;
+        for(auto it : node->neighbors){
+            if(mp.find(it) == mp.end())
+                t->neighbors.push_back(cloneGraph(it));
+            else
+                t->neighbors.push_back(mp[it]);
         }
-        //if the node is not present in the map , create a copy of it
-        if(copies.find(node) == copies.end()) {
-            // create a new node with the same value as the original node
-        copies[node] = new Node(node-> val, {});
-        //copy the neighbors of the original node recursively 
-        for(Node* neighbor: node-> neighbors){
-            copies[node] -> neighbors.push_back(cloneGraph(neighbor));
-        }
-        }
-        return copies[node];
+        return t;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
