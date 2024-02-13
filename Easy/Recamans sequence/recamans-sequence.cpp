@@ -5,13 +5,10 @@
 using namespace std;
 
 // } Driver Code Ends
-// User function Template for C++
 class Solution{
 public:
 
-   
     vector<int> recamanSequence(int n){
-        // code here
         vector<int>ans(n,-1);
         unordered_set<int>us;
         ans[0] = 0;
@@ -21,11 +18,9 @@ public:
             ans[i] = prev -i;
             }
             else ans[i] = prev+i;
-            
             us.insert(ans[i]);
         }
         return ans;
-        
     }
 };
 
