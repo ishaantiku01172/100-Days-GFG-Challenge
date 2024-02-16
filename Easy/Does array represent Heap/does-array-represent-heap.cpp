@@ -7,7 +7,6 @@ class Solution{
     public:
     bool isMaxHeap(int arr[], int n)
     {
-        // Your code goes here
         int t1 = (n-1)/2, t2 = (n/2);
         if(n%2 == 0){
             t1 = (n/2);
