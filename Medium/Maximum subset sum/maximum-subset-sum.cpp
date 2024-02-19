@@ -29,7 +29,6 @@ public:
 
 // } Driver Code Ends
 class Solution {
-
   public:
     long long findMaxSubsetSum(int N, vector<int> &A) {
         vector<long long> prev(2), cur(2);
