@@ -27,17 +27,9 @@ int search(Node *r, int num);
 
 
 // } Driver Code Ends
-/* The structure of Node
-struct Node{
-    int data;
-    Node *left,*right;
-}; */
-
-
 class Solution
 {
     public:
-        /*You are required to complete below method */
         int sumOfLeafNodes(Node *root ){
             if(root==nullptr){
                 return 0;
