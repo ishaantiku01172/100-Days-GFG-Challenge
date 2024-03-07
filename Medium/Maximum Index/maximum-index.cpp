@@ -6,13 +6,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-        
-    // A[]: input array
-    // N: size of array
-    // Function to find the maximum index difference.
-    int maxIndexDiff(int arr[], int n) 
+        int maxIndexDiff(int arr[], int n) 
     { 
-        // Your code here
         int left[n];
         left[0] = arr[0];
         for(int i=1; i<n; i++){
