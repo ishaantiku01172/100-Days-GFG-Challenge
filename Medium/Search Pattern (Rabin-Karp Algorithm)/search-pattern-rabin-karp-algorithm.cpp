@@ -9,25 +9,20 @@ class Solution
     public:
        vector <int> search(string pattern, string text)
         {
-            //code here.
             vector<int> ans;
             int n = text.size();
             int m = pattern.size();
             
-            // Iterate through the text
             for(int i=0; i<n; i++){
                 
                 bool match = true;
                 
-                // Iterate through the pattern and text, 
-                // If they are not equal then break
                 for(int j=0; j<m; j++)
                     if(text[i+j] != pattern[j]){
                         match = false;
                         break;
                     }
                     
-                // If they are equal then add it to the ans
                 if(match==true)
                     ans.push_back(i+1);
             }
