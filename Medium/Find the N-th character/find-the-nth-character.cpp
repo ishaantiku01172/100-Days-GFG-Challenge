@@ -4,12 +4,9 @@ using namespace std;
 
 
 // } Driver Code Ends
-//User function template for C++
-
 class Solution{
   public:
      char nthCharacter(string s, int r, int n) {
-        //code here
         int iter = 0;
          string ans = "";
          while(iter < r){
