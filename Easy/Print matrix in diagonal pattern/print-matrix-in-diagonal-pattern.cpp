@@ -5,8 +5,6 @@ using namespace std;
 
 
 // } Driver Code Ends
-/*You are required to complete this method */
-
 class Solution{
   public:
     vector<int> matrixDiagonally(vector<vector<int>>&mat)
