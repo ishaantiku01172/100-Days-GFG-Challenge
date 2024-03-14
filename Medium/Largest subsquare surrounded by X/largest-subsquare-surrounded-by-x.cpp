@@ -11,114 +11,33 @@ class Solution {
 
   public:
 
-    int largestSubsquare(int N, vector<vector<char>> A) {
-
+   int largestSubsquare(int n, vector<vector<char>> a) {
         // code here
-
-        // Top and left arrays;
-
-        vector<vector<int>> top(N,vector<int>(N,0));
-
-        vector<vector<int>> left(N,vector<int>(N,0));
-
+        vector<vector<int>> ver(n , vector<int>(n, 0)) , hor(n , vector<int>(n, 0));
+        int side = 0;
         
-
-        // Top metric 
-
-        for (int i=0;i<N;i++) {
-
-            for (int j=0;j<N;j++) {
-
-                if (A[i][j] == 'X') {
-
-                    if (i!=0)
-
-                        top[i][j] = top[i-1][j]+1;
-
-                    else 
-
-                        top[i][j] = 1;
-
+        for(int i = 0; i < n ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(a[i][j] == 'X'){
+                    ver[i][j] = i == 0 ? 1 : ver[i-1][j] + 1;
+                    hor[i][j] = j == 0 ? 1 : hor[i][j-1] + 1;
                 }
-
             }
-
         }
-
         
-
-        // left metric 
-
-        for (int i=0;i<N;i++) {
-
-            for (int j=0;j<N;j++) {
-
-                if (A[i][j] == 'X') {
-
-                    if (j!=0)
-
-                        left[i][j] = left[i][j-1]+1;
-
-                    else 
-
-                        left[i][j] = 1;
-
-                }
-
-            }
-
-        }
-
-        
-
-        int maxSubSq = 0;
-
-        
-
-        for (int i=0;i<N;i++) {
-
-            for (int j=0;j<N;j++) {
-
-                if (top[i][j] == 0 || left[i][j] == 0)
-
-                    continue;
-
-                
-
-                int currentValue = min(top[i][j],left[i][j]);
-
-                int top1 = i-currentValue +1;
-
-                int left1 = j-currentValue + 1;
-
-                while (currentValue>0) {
-
-                    int top1 = i-currentValue +1;
-
-                    int left1 = j-currentValue + 1;
-
-                    if ((left[top1][j] >= currentValue) && (top[i][left1] >= currentValue)) {
-
-                        maxSubSq = max(maxSubSq,currentValue);
-
-                        break;
-
+        for(int i = n-1 ; i >= 0 ; i--){
+            for(int j = n-1 ; j >= 0 ; j--){
+                int val = min(ver[i][j] , hor[i][j]);
+                while(val > side){
+                    if(ver[i][j-val+1] >= val and hor[i-val+1][j] >= val){
+                        side = val;
                     }
-
-                    currentValue--;
-
-                    
-
+                    val--;
                 }
-
-                
-
             }
-
         }
-
-        return maxSubSq;
-
+        
+        return side;
     }
 
 };
