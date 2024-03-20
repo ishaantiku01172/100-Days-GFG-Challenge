@@ -114,21 +114,32 @@ struct Node
     }
 };
 */
-class Solution{
+class Solution
+{
 public:
-    pair<int,int> dfs(Node *root){
-        if(!root)
-            return { 0 , 0 };
-        auto ll = dfs(root->left);
-        auto rr = dfs(root->right);
-        if(ll.second > rr.second)
-            return { ll.first + root->data , ll.second + 1 };
-        else if(ll.second < rr.second)
-            return { rr.first + root->data , rr.second + 1 };
-        return { max(ll.first , rr.first) + root->data , ll.second + 1 };
+    
+     int ans=0;
+    int max_len = 0;
+    void solve(Node *root, int sum, int len){
+        if(root==NULL){
+            if(len > max_len){
+                ans = sum;
+                max_len = len;
+            }
+            if(len == max_len){
+                ans = max(ans,sum);
+            }
+            return;
+        }
+        solve(root->left,sum+root->data,len+1);
+        solve(root->right,sum+root->data,len+1);
     }
-    int sumOfLongRootToLeafPath(Node *root){
-        return dfs(root).first;
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        //code here
+        solve(root,0,1);
+        return ans;
     }
 };
 
